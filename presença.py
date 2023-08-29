@@ -5,6 +5,7 @@ import pandas as pd
 
 ## Abrir o arquivo de presença
 
+
 # Lê o arquivo de presença
 file = 'presenca.xlsx'
 
@@ -27,6 +28,7 @@ df = df.drop(df.index[0])
 
 df.columns = ['Matricula', 'Nome', 'Unidade do Parceiro', 'Entrada', 'Saída', 'Assinatura', 'Atraso', 'Nota']
 df_2.columns = ['Matricula', 'Nome', 'Unidade do Parceiro', 'Entrada', 'Saída', 'Assinatura', 'Atraso', 'Nota']
+
 # concatenando os dois dataframes
 alunos = pd.concat([df, df_2],ignore_index=True)
 
@@ -36,3 +38,7 @@ print(alunos)
 
 # exportando para csv (para testes)
 alunos.to_excel('alunos.xlsx', index=False)
+
+# Todo: 1 - Verificar se a planilha com a presença dos alunos está no formatada
+#       2 - Futuramente colocar um laço de repetição para verificar até a ultima planilha da pasta
+#       3 - Criar um filtro para verificar se a coluna é NaN e remover a coluna.
