@@ -100,4 +100,5 @@ alunos.to_excel('alunos.xlsx', index=False)
 
 # Todo: 1 - Verificar se a planilha com a presença dos alunos está no formatada
 #       2 - Futuramente colocar um laço de repetição para verificar até a ultima planilha da pasta
-#       3 - Criar um filtro para verificar se a coluna é NaN e remover a coluna.
+#       3 - Criar um filtro para verificar se a coluna é NaN e remover a coluna de uma forma recursiva
+#       4 - Fazer a leitura da data da aula
