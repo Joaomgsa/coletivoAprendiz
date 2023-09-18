@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicação de Upload de Planilha Excel</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos CSS aqui, se necessário */
+    </style>
+</head>
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+        <h1 class="mb-4">Aplicação de Upload de Planilha Excel</h1>
+        <form method="POST" action="/" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" name="file" id="customFile" accept=".xls" onchange="updateFileName(this)">
+                <label class="custom-file-label" for="customFile">Escolher Arquivo</label>
+            </div>
+            <div id="file-status" class="mt-2">Nenhum arquivo selecionado.</div>
+            <button type="submit" class="btn btn-primary mt-2" id="submit-button" disabled>Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function validateForm() {
+            var fileInput = document.getElementById('customFile');
+            
+            if (!fileInput.files.length > 0) {
+                alert('Por favor, selecione um arquivo.');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function updateFileName(input) {
+            var selectedFile = input.files[0];
+            var fileStatus = document.getElementById('file-status');
+            var submitButton = document.getElementById('submit-button');
+            
+            if (selectedFile) {
+                fileStatus.textContent = 'Arquivo selecionado: ' + selectedFile.name + ' (Pronto para envio)';
+                fileStatus.style.color = 'green';
+                submitButton.removeAttribute('disabled');
+            } else {
+                fileStatus.textContent = 'Nenhum arquivo selecionado.';
+                fileStatus.style.color = 'black';
+                submitButton.setAttribute('disabled', 'true');
+            }
+        }
+    </script>
+</body>
+</html>

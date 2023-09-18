@@ -103,3 +103,6 @@ alunos.to_excel('alunos.xlsx', index=False)
 #       3 - Criar um filtro para verificar se a coluna é NaN e remover a coluna de uma forma recursiva
 #       4 - Fazer a leitura da data da aula
 #       5 - Diminuir as gambiarras
+#       Desenvolver dashboard
+#       Estudar como vai ser explorado.
+#       Perguntar como é o processo de inclusão de novas turmas.
