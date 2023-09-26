@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Indicadores Pedagógicos</title>
+    <title>Indicadores Pedagógicos  -  Alertas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -29,34 +29,15 @@
       </nav>
       <main>
         <div class="container">
-          <div class="form">
-            <h3 class="text-primary">Upload de arquivos de entrada:</h2>
-            <div class="row card p-3">
-              <form>
-                <div class="form-group">
-                  <label for="arquivo">Arquivo</label>
-                  <input type="file" class="form-control-file" id="arquivo">
-                </div>
-                <div class="form-group">
-                  <label for="opcoes">Relatório:</label>
-                  <select class="form-control" id="opcoes">
-                    <option>Alunos x Faltas</option>
-                    <option>Empresas X Faltas</option>
-                    <option>Turmas X Faltas</option>
-                  </select>
-                </div>
-                <a class="btn btn-primary" href="/indicadores">Enviar</a>    
-                  <!--<button type="submit" class="btn btn-primary ">Enviar</button>-->
-              </form>
-            </div>
-            <div class="float-left">
-              <a class="btn btn-secondary mt-3" href="/">Voltar</a>
+          <div class="table-responsive">
+            <h2>Apuração de Faltas:</h2>
+            <table class="table table-striped">
+              {{table | safe}}
+            </table>
+            <div class="text-center">
+              <a class="btn btn-primary mt-3" href="/">Voltar</a>
             </div>
           </div>
         </div>
       </main>
 </html>
-
-<!-- to do 
-  - Ajustar formatação do formulário de entrada de arquivos
-  - Fazer uma função JS para escolher a pagina e validar entrada de arquivos : -->
