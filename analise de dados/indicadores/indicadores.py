@@ -24,7 +24,7 @@ def formularioerros():
 
 
 @app.route('/upload')
-def formularioerros():
+def upload():
     return render_template('upload.html')
 
 if __name__ == '__main__':

@@ -30,19 +30,32 @@
       <main>
         <div class="container">
           <div class="form">
-            <h2>Upload de arquivos de entrada:</h2>
-            <div class="row">
-              <div class="col">
-                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-              </div>
-              <div class="col">
-                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-              </div>
+            <h3 class="text-primary">Upload de arquivos de entrada:</h2>
+            <div class="row card p-3">
+              <form>
+                <div class="form-group">
+                  <label for="arquivo">Arquivo</label>
+                  <input type="file" class="form-control-file" id="arquivo">
+                </div>
+                <div class="form-group">
+                  <label for="opcoes">Relatório:</label>
+                  <select class="form-control" id="opcoes">
+                    <option>Alunos x Faltas</option>
+                    <option>Empresas X Faltas</option>
+                    <option>Turmas X Faltas</option>
+                  </select>
+                </div>
+                  <button type="submit" class="btn btn-primary ">Enviar</button>
+              </form>
             </div>
-            <div class="text-center">
-              <a class="btn btn-primary mt-3" href="/">Voltar</a>
+            <div class="float-left">
+              <a class="btn btn-secondary mt-3" href="/">Voltar</a>
             </div>
           </div>
         </div>
       </main>
 </html>
+
+<!-- to do 
+  - Ajustar formatação do formulário de entrada de arquivos
+  - Fazer uma função JS para escolher a pagina e validar entrada de arquivos : -->
