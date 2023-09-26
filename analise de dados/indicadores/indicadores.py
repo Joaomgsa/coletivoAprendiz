@@ -73,6 +73,8 @@ def alertas():
     # substuir valores nulos pelo valor pesquisar
     df_alertas['Apr_Celular'].fillna('Aluno Sem contatos', inplace=True)
     df_alertas['Apr_Email'].fillna('Aluno Sem contatos', inplace=True)
+    # remover caracteres ".0" da coluna celular
+    df_alertas['Apr_Celular'] = df_alertas['Apr_Celular'].astype(str).str.replace('.0', '')
     # ordenar por nome
     df_alertas.sort_values(by=['Apr_Nome_x'], ascending=True, inplace=True)
     # renomear colunas
