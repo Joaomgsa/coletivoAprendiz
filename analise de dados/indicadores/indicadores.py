@@ -28,7 +28,20 @@ def read_excel_alertas():
     df_alertas.sort_values(by=['Total Faltas'], ascending=False, inplace=True)
     # Alunos com duas ou mais faltas
     df_alertas = df_alertas[df_alertas['Total Faltas'] >= 2]
+    # Removendo colunas desnecessárias
+    df_alertas.drop(['Total Faltas','Total de Registros', 'Faltas'], axis=1, inplace=True)
     return df_alertas
+
+def montar_info_alunos():
+    #df_base_alunos = pd.read_excel('./documentos/ListaAtivosTurma-92023.xlsx')
+    #df_info_alunos.to_excel('./documentos/info_alunos.xlsx', index=False)
+    df = pd.read_excel('./documentos/ListaAtivosTurma-92023.xlsx')
+    df_base= df[['Apr_Codigo','Apr_Nome','Apr_Celular','Apr_Email']]
+    # Removendo duplicados
+    df_base.drop_duplicates(subset=['Apr_Codigo'], keep='first', inplace=True)
+    # converter coluna para string
+    df_base['Apr_Celular'] = df_base['Apr_Celular'].astype(str)
+    return df_base
 
 @app.route('/')
 def index():
@@ -37,12 +50,14 @@ def index():
 @app.route('/indicadores')
 def indicadores():
     df_faltas = read_excel()
-    table_faltas = df_faltas.to_html(classes='table table-striped table-hover table-sm table-responsive')
+     # renomear colunas
+    df_faltas.rename(columns={'Apr_Codigo': 'Matrícula', 'Apr_Nome_x': 'Nome', 'Total Faltas': 'Faltas', 'Faltas': 'Percent. Faltas'}, inplace=True)
+    table_faltas = df_faltas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
     return render_template('indicadores.html', table=table_faltas)
 
-@app.route('/acompanhamentoErros')
+@app.route('/formularioerros')
 def formularioerros():
-    return render_template('acompanhamentoErros.html')
+    return render_template('formularioerros.html')
 
 
 @app.route('/upload')
@@ -52,7 +67,18 @@ def upload():
 @app.route('/alertas')
 def alertas():
     df_alertas = read_excel_alertas()
-    table_alertas = df_alertas.to_html(classes='table table-striped table-hover table-sm table-responsive')
+    df_info_alunos = montar_info_alunos()
+    df_alertas = pd.merge(df_alertas, df_info_alunos, on='Apr_Codigo', how='left')
+    df_alertas = df_alertas[['Apr_Codigo','Apr_Nome_x','Apr_Celular','Apr_Email']]
+    # substuir valores nulos pelo valor pesquisar
+    df_alertas['Apr_Celular'].fillna('Aluno Sem contatos', inplace=True)
+    df_alertas['Apr_Email'].fillna('Aluno Sem contatos', inplace=True)
+    # ordenar por nome
+    df_alertas.sort_values(by=['Apr_Nome_x'], ascending=True, inplace=True)
+    # renomear colunas
+    df_alertas.rename(columns={'Apr_Codigo': 'Matrícula', 'Apr_Nome_x': 'Nome', 'Apr_Celular': 'Celular', 'Apr_Email': 'Email'}, inplace=True)
+    #Gerar HTML da tabela
+    table_alertas = df_alertas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
     return render_template('alertas.html', table=table_alertas)
 
 

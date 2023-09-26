@@ -1,60 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Indicadores Pedagógicos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>Indicadores Pedagógicos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Coletivo Aprendiz</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Indicadores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/acompanhamentoErros">Acompanhamento Erros</a>
-              </li>
-            </ul>
+  <nav class="navbar navbar-expand-lg bg-body-secondary">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">&nbsp;</a>
+        <img src="{{ url_for('static', filename='logo.png') }}">
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/indicadores">Indicadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/formularioerros">Acompanhamento Erros</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="form">
+        <h3 class="text-primary">Upload de arquivos de entrada:</h2>
+          <div class="row card p-3">
+            <form>
+              <div class="form-group">
+                <label for="arquivo">Arquivo</label>
+                <input type="file" class="form-control-file" id="arquivo">
+              </div>
+              <div class="form-group">
+                <label for="opcoes">Relatório:</label>
+                <select class="form-control" id="opcoes">
+                  <option>Alunos x Faltas</option>
+                  <option>Empresas X Faltas</option>
+                  <option>Turmas X Faltas</option>
+                </select>
+              </div>
+              <a class="btn btn-primary" href="/indicadores">Enviar</a>
+              <!--<button type="submit" class="btn btn-primary ">Enviar</button>-->
+            </form>
           </div>
-        </div>
-      </nav>
-      <main>
-        <div class="container">
-          <div class="form">
-            <h3 class="text-primary">Upload de arquivos de entrada:</h2>
-            <div class="row card p-3">
-              <form>
-                <div class="form-group">
-                  <label for="arquivo">Arquivo</label>
-                  <input type="file" class="form-control-file" id="arquivo">
-                </div>
-                <div class="form-group">
-                  <label for="opcoes">Relatório:</label>
-                  <select class="form-control" id="opcoes">
-                    <option>Alunos x Faltas</option>
-                    <option>Empresas X Faltas</option>
-                    <option>Turmas X Faltas</option>
-                  </select>
-                </div>
-                <a class="btn btn-primary" href="/indicadores">Enviar</a>    
-                  <!--<button type="submit" class="btn btn-primary ">Enviar</button>-->
-              </form>
-            </div>
-            <div class="float-left">
-              <a class="btn btn-secondary mt-3" href="/">Voltar</a>
-            </div>
+          <div class="float-left">
+            <a class="btn btn-secondary mt-3" href="/">Voltar</a>
           </div>
-        </div>
-      </main>
+      </div>
+    </div>
+  </main>
+
 </html>
 
 <!-- to do 
