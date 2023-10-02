@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Indicadores Pedagógicos - Notificações</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-secondary">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">&nbsp;</a>
+        <img src="{{ url_for('static', filename='logo.png') }}">
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/indicadores">Indicadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/formularioerros">Acompanhamento Erros</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <div class="table-responsive">
+        <h2>Apuração de Faltas:</h2>
+        <div>
+          <div class="float-right">
+            <a class="btn btn-primary mt-3" href="/alertas">Notificar via email</a>
+            <a class="btn btn-warning mt-3" href="/alertas">Notificar via sms</a>
+          </div>
+          <div class="float-left">
+            <a class="btn btn-light mt-3" href="/">Voltar Home</a>
+            <a class="btn btn-secondary mt-3" href="/indicadores"> Voltar Ranking faltas</a>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Matrícula</th>
+              <th>Nome</th>
+              <th>Celular</th>
+              <th>Email</th>
+              <th>-</th>
+              <th>-</th>
+              <th>-</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for index, row in df_alertas.iterrows() %}
+            <tr>
+                <td>{{ row['Matrícula'] }}</td>
+                <td>{{ row['Nome'] }}</td>
+                <td>{{ row['Celular'] }}</td>
+                <td>{{ row['Email'] }}</td>
+                <td><a href="/" class="btn btn-primary">Anotação</a></td>
+                <td><a href="/" class="btn btn-secondary">Email</a></td>
+                <td><a href="/" class="btn btn-success">whatsapp</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+        </table>
+      </div>
+    </div>
+  </main>
+
+</html>

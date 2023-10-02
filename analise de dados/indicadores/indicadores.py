@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import pandas as pd
+import plotly.express as px
 
 app = Flask(__name__)
 
@@ -82,6 +83,27 @@ def alertas():
     #Gerar HTML da tabela
     table_alertas = df_alertas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
     return render_template('alertas.html', table=table_alertas)
+
+@app.route('/notificacoes')
+def notificacoes():
+    df_alertas = read_excel_alertas()
+    df_info_alunos = montar_info_alunos()
+    df_alertas = pd.merge(df_alertas, df_info_alunos, on='Apr_Codigo', how='left')
+    df_alertas = df_alertas[['Apr_Codigo','Apr_Nome_x','Apr_Celular','Apr_Email']]
+    # substuir valores nulos pelo valor pesquisar
+    df_alertas['Apr_Celular'].fillna('Aluno Sem contatos', inplace=True)
+    df_alertas['Apr_Email'].fillna('Aluno Sem contatos', inplace=True)
+    # remover caracteres ".0" da coluna celular
+    df_alertas['Apr_Celular'] = df_alertas['Apr_Celular'].astype(str).str.replace('.0', '')
+    # ordenar por nome
+    df_alertas.sort_values(by=['Apr_Nome_x'], ascending=True, inplace=True)
+    # renomear colunas
+    df_alertas.rename(columns={'Apr_Codigo': 'Matrícula', 'Apr_Nome_x': 'Nome', 'Apr_Celular': 'Celular', 'Apr_Email': 'Email'}, inplace=True)
+    #Gerar HTML da tabela
+     #df_alertas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
+    return render_template('notificacoes.html',df_alertas=df_alertas)
+
+
 
 
 if __name__ == '__main__':
