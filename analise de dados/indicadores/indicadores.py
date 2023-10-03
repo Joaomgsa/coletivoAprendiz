@@ -28,7 +28,7 @@ def read_excel_alertas():
     # Ordenando por faltas
     df_alertas.sort_values(by=['Total Faltas'], ascending=False, inplace=True)
     # Alunos com duas ou mais faltas
-    df_alertas = df_alertas[df_alertas['Total Faltas'] >= 2]
+    df_alertas = df_alertas[df_alertas['Total Faltas'] >= 3]
     # Removendo colunas desnecessárias
     df_alertas.drop(['Total Faltas','Total de Registros', 'Faltas'], axis=1, inplace=True)
     return df_alertas
@@ -64,6 +64,10 @@ def formularioerros():
 @app.route('/upload')
 def upload():
     return render_template('upload.html')
+
+@app.route('/uploadAlunos')
+def upload():
+    return render_template('uploadAlunos.html')
 
 @app.route('/alertas')
 def alertas():
