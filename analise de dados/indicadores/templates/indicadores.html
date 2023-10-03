@@ -37,17 +37,46 @@
     <div class="container">
       <div class="table-responsive">
         <h2>Apuração de Faltas: </h2>
-          <div class="align-text-center">
-            <h5>Agosto/2023</h5> <span class="badge badge-pill badge-warning">Alunos com 2(duas) faltas ou mais</span>
-          </div>
-          <div class="float-left">
-            <a class="btn btn-light mt-3" href="/">Voltar</a>
-          </div>
-          <div class="float-right">
-            <a class="btn btn-warning mt-3" href="/alertas">Notificar</a>
-          </div>
-        <table class="table table-striped">
+        <div class="align-text-center">
+          <h5>Agosto/2023</h5> <span class="badge badge-pill badge-warning">Alunos com 3(Três) faltas ou mais</span>
+        </div>
+        <div class="float-left">
+          <a class="btn btn-light" href="/">Voltar</a>
+        </div>
+        <div class="float-right p-4">
+          <a class="btn btn-secondary" href="{{ url_for('static', filename='docs/faltas.xlsx') }}">Exportar</a>
+          <a class="btn btn-warning" href="/notificacoes">Notificar</a>
+          <!-- Falta arrumar o botão de pesquisa-->
+          <input type="text" class="" id="filtroTabela" placeholder="Digite algo para filtrar...">
+          <button class="btn btn-primary" onclick="filtrarTabela()">Filtrar</button>
+        </div>
+        <!--input type="text" id="filtroTabela" placeholder="Filtrar por nome">
+        <button onclick="filtrarTabela()">Filtrar</button-->
+        <!--Matricula - Nome Aprendiz - Faltas - Total de Registros - Percentual Faltas -->
+        <!--table class="table table-striped" id="aprendizes">
           {{table | safe}}
+        </table-->
+        <table class="table table-striped table-bordered" id="aprendizes">
+          <thead>
+            <tr>
+              <th>Matrícula</th>
+              <th>Nome</th>
+              <th>Faltas</th>
+              <th>Total de Registros</th>
+              <th>% Faltas</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for index, row in df_faltas.iterrows() %}
+            <tr>
+              <td>{{ row['Matrícula'] }}</td>
+              <td>{{ row['Apr_Nome'] }}</td>
+              <td>{{ row['Faltas'] }}</td>
+              <td>{{ row['Total de Registros'] }}</td>
+              <td>{{ row['Percent. Faltas'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
         </table>
         <div class="text-center">
           <a class="btn btn-primary mt-3" href="/">Voltar</a>
@@ -55,4 +84,7 @@
       </div>
     </div>
   </main>
+  <script src="{{ url_for('static', filename='js/filtros.js') }}"></script>
+</body>
+
 </html>

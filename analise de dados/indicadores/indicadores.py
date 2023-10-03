@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file
 import pandas as pd
 import plotly.express as px
 
@@ -53,8 +53,10 @@ def indicadores():
     df_faltas = read_excel()
      # renomear colunas
     df_faltas.rename(columns={'Apr_Codigo': 'Matrícula', 'Apr_Nome_x': 'Nome', 'Total Faltas': 'Faltas', 'Faltas': 'Percent. Faltas'}, inplace=True)
-    table_faltas = df_faltas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
-    return render_template('indicadores.html', table=table_faltas)
+    #table_faltas = df_faltas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
+    #salvar tabela em arquivo excel
+    df_faltas.to_excel('./static/docs/faltas.xlsx', index=False)
+    return render_template('indicadores.html', df_faltas=df_faltas)
 
 @app.route('/formularioerros')
 def formularioerros():
@@ -66,7 +68,7 @@ def upload():
     return render_template('upload.html')
 
 @app.route('/uploadAlunos')
-def upload():
+def uploadAlunos():
     return render_template('uploadAlunos.html')
 
 @app.route('/alertas')
@@ -105,7 +107,7 @@ def notificacoes():
     df_alertas.rename(columns={'Apr_Codigo': 'Matrícula', 'Apr_Nome_x': 'Nome', 'Apr_Celular': 'Celular', 'Apr_Email': 'Email'}, inplace=True)
     #Gerar HTML da tabela
      #df_alertas.to_html(classes='table table-striped table-hover table-sm table-responsive', index=False)
-    return render_template('notificacoes.html',df_alertas=df_alertas)
+    return render_template('notificacoes.html',df_alertas=df_alertas) 
 
 
 
